@@ -1,4 +1,4 @@
-package com.rubitree.nestedscrolling4.sample;
+package com.rubitree.demo.sample;
 
 import android.content.Context;
 import android.util.AttributeSet;
