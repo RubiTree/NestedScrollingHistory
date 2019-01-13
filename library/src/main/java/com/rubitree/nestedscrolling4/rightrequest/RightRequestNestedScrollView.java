@@ -19,7 +19,7 @@ import androidx.core.widget.NestedScrollView;
  * <p>
  * >> Others <<
  * <p>
- * Created by BigBear ; On 2019-01-13.
+ * Created by RubiTree ; On 2019-01-13.
  */
 public class RightRequestNestedScrollView extends NestedScrollView {
     public RightRequestNestedScrollView(@NonNull Context context) {
