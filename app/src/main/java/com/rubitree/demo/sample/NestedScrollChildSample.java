@@ -16,12 +16,13 @@ import androidx.core.view.ViewCompat;
 
 /**
  * >> Description <<
- * 虽然没有报错，但这不是可以运行的代码，这是剔除 NestedScrollView 中关于 parent 的部分，得到的可以认为是官方的 NestedScrollingChild
- * 接口的实现建议，关键是在在触摸和滚动时怎么调用 NestedScrollingChild 的方法，也就是下面 onInterceptTouchEvent() 、 onTouchEvent() 、
- * computeScroll() 中大约150行的代码
+ * 虽然没有报错，但这不是可以运行的代码，这是剔除 NestedScrollView 中关于 parent 的部分，得到的可以认为是官方的
+ * NestedScrollingChild 接口的实现建议，关键是在在触摸和滚动时怎么调用 NestedScrollingChild 的方法，也就是下
+ * 面 onInterceptTouchEvent() 、 onTouchEvent() 、 computeScroll() 中不到 200 行的代码
  * <p>
  * >> Attention <<
- * 这里为了让主线逻辑更加清晰，省略了多点触控和窗体偏移相关的代码，实际开发如果需要，可以直接参考 NestedScrollView 中的写法，也不会很麻烦
+ * 这里为了让主线逻辑更加清晰，省略了多点触控相关的代码，实际开发如果需要，可以直接参考 NestedScrollView 中的写
+ * 法，也不会很麻烦
  * <p>
  * >> Others <<
  * <p>
@@ -48,6 +49,9 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
     /**
      * Used during scrolling to retrieve the new offset within the window.
      */
+    private final int[] mScrollOffset = new int[2];
+    private int mNestedYOffset;
+
     private final int[] mScrollConsumed = new int[2];
     private int mLastScrollerY;
     private int mLastMotionY;
@@ -183,10 +187,11 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
                     final int y = (int) ev.getY();
                     final int yDiff = Math.abs(y - mLastMotionY);
 
-                    if (yDiff > mTouchSlop && (getNestedScrollAxes() & ViewCompat.SCROLL_AXIS_VERTICAL) == 0) {
+                    if (yDiff > mTouchSlop) {
                         mIsBeingDragged = true;
                         mLastMotionY = y;
                         mVelocityTracker.addMovement(ev);
+                        mNestedYOffset = 0;
 
                         requestParentDisallowInterceptTouchEvent();
                     }
@@ -208,6 +213,10 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
     public boolean onTouchEvent(MotionEvent ev) {
         final int actionMasked = ev.getActionMasked();
 
+        MotionEvent vtev = MotionEvent.obtain(ev);
+        if (actionMasked == MotionEvent.ACTION_DOWN) mNestedYOffset = 0;
+        vtev.offsetLocation(0, mNestedYOffset);
+
         switch (actionMasked) {
             case MotionEvent.ACTION_DOWN: {
                 if ((mIsBeingDragged = isSelfScrolling())) requestParentDisallowInterceptTouchEvent();
@@ -223,8 +232,10 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
                 final int y = (int) ev.getY();
                 int deltaY = mLastMotionY - y;
 
-                if (dispatchNestedPreScroll(0, deltaY, mScrollConsumed, null, ViewCompat.TYPE_TOUCH)) {
+                if (dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset, ViewCompat.TYPE_TOUCH)) {
                     deltaY -= mScrollConsumed[1];
+                    vtev.offsetLocation(0, mScrollOffset[1]);
+                    mNestedYOffset += mScrollOffset[1];
                 }
 
                 if (!mIsBeingDragged && Math.abs(deltaY) > mTouchSlop) {
@@ -239,10 +250,14 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
                 }
 
                 if (mIsBeingDragged) {
+                    // Scroll to follow the motion event
+                    mLastMotionY = y - mScrollOffset[1];
+
                     final int oldY = getScrollY();
 
                     // Calling overScrollByCompat will call onOverScrolled, which calls onScrollChanged if applicable.
-                    if (overScrollByCompat(0, deltaY, 0, getScrollY(), 0, getScrollRange(), 0, 0, true) && !hasNestedScrollingParent(ViewCompat.TYPE_TOUCH)) {
+                    if (overScrollByCompat(0, deltaY, 0, getScrollY(), 0, getScrollRange(), 0, 0, true)
+                            && !hasNestedScrollingParent(ViewCompat.TYPE_TOUCH)) {
                         // Break our velocity if we hit a scroll barrier.
                         mVelocityTracker.clear();
                     }
@@ -252,9 +267,13 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
 
                     mScrollConsumed[1] = 0;
 
-                    dispatchNestedScroll(0, scrolledDeltaY, 0, unconsumedY, null, ViewCompat.TYPE_TOUCH, mScrollConsumed);
+                    dispatchNestedScroll(0, scrolledDeltaY, 0, unconsumedY, mScrollOffset, ViewCompat.TYPE_TOUCH, mScrollConsumed);
 
+                    mLastMotionY -= mScrollOffset[1];
+                    vtev.offsetLocation(0, mScrollOffset[1]);
+                    mNestedYOffset += mScrollOffset[1];
                     deltaY -= mScrollConsumed[1];
+
                     if (canOverscroll()) showOverScrollEdgeEffect();
                 }
                 break;
@@ -280,7 +299,8 @@ public class NestedScrollChildSample extends FrameLayout implements NestedScroll
                 break;
         }
 
-        if (mVelocityTracker != null) mVelocityTracker.addMovement(ev);
+        if (mVelocityTracker != null) mVelocityTracker.addMovement(vtev);
+        vtev.recycle();
 
         return true;
     }
