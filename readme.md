@@ -1,6 +1,8 @@
 # NestedScrollingHistory
 
-<img src="./resource/title.jpg" width="90%"/>
+<img src="./resource/title.jpg" width="100%"/>
+
+---
 
 What's NestedScrolling?
 
@@ -9,6 +11,8 @@ What's different between `NestedScrollingChild` / `NestedScrollingChild2` / `Nes
 Why newest(`androidx.core 1.1.0-alpha01`) `NestedScrollView` sometimes out of control?
 
 <img src="./resource/bug3_1.gif" width="20%"/>
+
+---
 
 You can see all details [here]() ([中文]()).
 
@@ -37,6 +41,6 @@ Step 2. Add the dependency
 
 ```groovy
 dependencies {
-        implementation 'com.github.RubiTree:NestedScrollingHistory:v1.0.0'
+        implementation 'com.github.RubiTree:NestedScrollingHistory:1.0.1'
 }
 ```
