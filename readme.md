@@ -1,6 +1,6 @@
 # NestedScrollingHistory
 
-<img src="./resource/title.jpg" width="70%"/>
+<img src="./resource/title.jpg" width="90%"/>
 
 What's NestedScrolling?
 
@@ -8,7 +8,7 @@ What's different between `NestedScrollingChild` / `NestedScrollingChild2` / `Nes
 
 Why newest(`androidx.core 1.1.0-alpha01`) `NestedScrollView` sometimes out of control?
 
-<img src="./resource/bug3_1.gif" width="30%"/>
+<img src="./resource/bug3_1.gif" width="20%"/>
 
 You can see all details [here]() ([中文]()).
 
@@ -18,7 +18,7 @@ You also can get better `NestedScrollView4` instead of `NestedScrollView` bellow
 
 `NestedScrollView4` use like
 
-<img src="./resource/bug3_2.gif" width="30%"/>
+<img src="./resource/bug3_2.gif" width="20%"/>
 
 For Gradle
 
