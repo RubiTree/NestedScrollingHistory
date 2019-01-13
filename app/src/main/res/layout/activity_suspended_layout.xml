@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.rubitree.demo.suspendedlayout.widget.SuspendedLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".suspendedlayout.SuspendedLayoutActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp"
+        android:paddingBottom="60dp"
+        android:text="HEADER"
+        android:textSize="100dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/grey"
+        android:background="@color/softGreen"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUSPENDED"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="60dp"
+        android:paddingLeft="10dp"
+        android:textColor="@color/softGreen"
+        android:background="@color/grey"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"/>
+
+</com.rubitree.demo.suspendedlayout.widget.SuspendedLayout>

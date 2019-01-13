@@ -3,5 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="light_yellow">#fcedbd</color>
+    <color name="grey">#838383</color>
+    <color name="grey_alpha">#58838383</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="softGreen">#e5fadf</color>
+    <color name="softYellow">#fdedbc</color>
+    <color name="light_yellow">#fdedbc</color>
+    <color name="softBlue">#FFB1F1F5</color>
 </resources>
