@@ -25,7 +25,7 @@ You also can get better `NestedScrollView4` instead of `NestedScrollView` bellow
 <img src="./resource/bug3_2.gif" width="20%"/>
 
 [![](https://img.shields.io/badge/Version-v1.0.1-green.svg)](https://github.com/RubiTree/NestedScrollingHistory/releases/tag/1.0.1)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/SaltedfishCaptain/flog/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/RubiTree/NestedScrollingHistory/blob/master/LICENSE)
 
 For Gradle
 
@@ -49,4 +49,4 @@ dependencies {
 ```
 
 ## License
-Apache License 2.0, here is the [LICENSE](https://github.com/SaltedfishCaptain/flog/blob/master/LICENSE).
+Apache License 2.0, here is the [LICENSE](https://github.com/RubiTree/NestedScrollingHistory/blob/master/LICENSE).
