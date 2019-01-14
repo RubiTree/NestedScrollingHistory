@@ -14,7 +14,7 @@ Why newest(`androidx.core 1.1.0-alpha01`) `NestedScrollView` sometimes out of co
 
 ---
 
-You can see all details [here]() ([中文]()).
+You can see all details [here](http://blog.rubitree.com/15467469615604.html) ([中文](http://blog.rubitree.com/15467469615604.html)).
 
 You also can get better `NestedScrollView4` instead of `NestedScrollView` bellow.
 
