@@ -6,7 +6,7 @@
 
 What's NestedScrolling?
 
-What's different between `NestedScrollingChild` / `NestedScrollingChild2` / `NestedScrollingChild3` ?
+What's the difference among `NestedScrollingChild` & `NestedScrollingChild2` & `NestedScrollingChild3` ?
 
 Why newest(`androidx.core 1.1.0-alpha01`) `NestedScrollView` sometimes out of control?
 
